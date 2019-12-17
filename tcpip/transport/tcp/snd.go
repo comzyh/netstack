@@ -37,6 +37,9 @@ const (
 	// nDupAckThreshold is the number of duplicate ACK's required
 	// before fast-retransmit is entered.
 	nDupAckThreshold = 3
+
+	// maxInt is the largest representable value of type int.
+	maxInt = int(^uint(0) >> 1)
 )
 
 // ccState indicates the current congestion control state for this sender.
@@ -266,7 +269,7 @@ func newSender(ep *endpoint, iss, irs seqnum.Value, sndWnd seqnum.Size, mss uint
 // their initial values.
 func (s *sender) initCongestionControl(congestionControlName tcpip.CongestionControlOption) congestionControl {
 	s.sndCwnd = InitialCwnd
-	s.sndSsthresh = math.MaxInt64
+	s.sndSsthresh = maxInt
 
 	switch congestionControlName {
 	case ccCubic:
