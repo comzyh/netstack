@@ -511,6 +511,9 @@ type endpoint struct {
 
 	gso *stack.GSO
 
+	//this is alignment for stats until https://github.com/golang/go/issues/19057 is fixed
+	stats_alignment uint32
+
 	// TODO(b/142022063): Add ability to save and restore per endpoint stats.
 	stats Stats
 
